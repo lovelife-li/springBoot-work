@@ -11,6 +11,7 @@
 * 对controller层返回的数据做了统一封装
 * 集成swagger
 * 对controller层写了测试用例
+* 日志采用log4j2处理
 
 #### 说明：
 * 项目是针对会springBoot项目的javaWeb开发人员
