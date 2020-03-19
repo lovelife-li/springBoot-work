@@ -1,10 +1,14 @@
 package com.springboot.demo.config;
 
-import com.springboot.demo.common.EnumConvertFactory;
+import com.springboot.demo.convert.EnumConvertFactory;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+
+/**
+ * @author ldb
+ */
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 

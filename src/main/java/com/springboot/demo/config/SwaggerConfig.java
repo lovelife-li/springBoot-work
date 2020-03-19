@@ -19,7 +19,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 @Configuration
 @EnableSwagger2
-@Profile(value = {"default", "dev", "test" })
+//@Profile(value = {"", "dev", "test" })
 public class SwaggerConfig {
 	@Bean
 	public Docket createRestApi() {
@@ -28,7 +28,7 @@ public class SwaggerConfig {
 	}
 
 	private ApiInfo apiInfo() {
-		return new ApiInfoBuilder().title("core Swagger RESTful APIs").description("core Swagger API服务")
+		return new ApiInfoBuilder().title("springBoot 测试").description("springBoot测试API服务")
 				.termsOfServiceUrl("http://swagger.io/").contact(new Contact("ldb", "127.0.0.1", "lidebo@qq.com"))
 				.version("1.0").build();
 

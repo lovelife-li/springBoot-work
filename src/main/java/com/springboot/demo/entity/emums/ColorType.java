@@ -12,7 +12,6 @@ import lombok.ToString;
  * @date 2019-04-30 14:21
  */
 @Getter
-@ToString
 @AllArgsConstructor
 public enum  ColorType implements CommonEnum,IEnum<Integer> {
 
@@ -30,6 +29,11 @@ public enum  ColorType implements CommonEnum,IEnum<Integer> {
 
         System.out.println(CommonEnum.getEnumByName(ColorType.class,"绿色"));
 
+    }
+
+    @Override
+    public String toString(){
+        return this.getValue()+":"+this.getMsg();
     }
 
 }

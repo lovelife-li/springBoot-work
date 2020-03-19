@@ -22,7 +22,7 @@ import lombok.ToString;
 /**
  * 返回错误码枚举类
  *
- * @author ldb
+ * @author ioiogoo
  * @date 2019-03-15 10:35
  */
 @ToString

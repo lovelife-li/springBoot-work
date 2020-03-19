@@ -1,10 +1,7 @@
 package com.springboot.demo.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonValue;
 import com.springboot.demo.entity.emums.ColorType;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -33,6 +30,6 @@ public class ReqData {
 
     private Integer[] ids;
 
-    private HashMap<Integer,ColorType> map;
+    private HashMap<Integer, ColorType> map;
 
 }

@@ -1,19 +1,8 @@
-/*
- * *********************************************************************************************
- *    Copyright (c) 2019. YNT CO., LTD. All Rights Reserved.
- *    FileName    : CommonEnum.java
- *    Date        : 2019-4-29
- *    Author      : 梁宇 （Eid Leung）
- *    Module      : CommonEnum
- *    Function    :
- *  --------------------------------------------------------------------------------------------
- *    Modify History
- *    NO        Date        Modifier        Modified Content
- * *********************************************************************************************
- */
-
 package com.springboot.demo.common;
-
+/**
+ * @author  : ldb
+ * @version : 1.0
+ */
 public interface CommonEnum {
     Integer getValue();
     String getMsg();
