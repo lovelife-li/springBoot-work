@@ -8,9 +8,9 @@ spring:
   profiles:
     include:
       - redis
-      - sharding
-#      - druid
-#      - mybatis-plus
+#      - sharding
+      - druid
+      - mybatis-plus
   http:
     encoding:
       charset: UTF-8
