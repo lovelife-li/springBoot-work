@@ -104,7 +104,7 @@ public abstract class AbstractLogAspect {
             temp.put("controller_" + ctime, flag);
             temp.put(CTIME, ++ctime);
             String str = StringUtils.replace(JsonUtils.getInstance(true).writeValueAsString(temp), "\\n", "\n");
-            log.debug(StringUtils.replace(str, "\\t", "\t"), te);
+//            log.debug(StringUtils.replace(str, "\\t", "\t"), te);
         } catch (Exception e) {
             log.error("log record fail", e);
         } finally {

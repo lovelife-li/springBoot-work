@@ -33,4 +33,22 @@ spring:
 * post请求，枚举默认只支持传枚举值字符串。默认jackson不支持转换。如果使用@JsonValue 用在枚举指定字段上，
 可以传字符串，将支持转换。
 
-
+#### 5 分库分表
+```yaml
+spring:
+  profiles:
+    include:
+      - redis
+      - sharding
+#      - druid
+      - mybatis-plus
+```
+* 测试sharding-jdbc需要注销druid,并注销其maven中连接池。因为连接池只能用一个。
+```text
+        <!--引入阿里数据库连接池-->
+<!--        <dependency>-->
+<!--            <groupId>com.alibaba</groupId>-->
+<!--            <artifactId>druid-spring-boot-starter</artifactId>-->
+<!--            <version>1.1.14</version>-->
+<!--        </dependency>-->
+```

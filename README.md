@@ -10,7 +10,7 @@
 * 加入全局异常处理
 * 对controller层返回的数据做了统一封装
 * 集成swagger
-* 集成sharding-jdbc,简单分库分表
+* 集成sharding-jdbc,简单分库分表,并用了HikariCP连接池
 * 对controller层写了测试用例
 
 #### 说明：

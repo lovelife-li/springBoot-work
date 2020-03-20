@@ -13,8 +13,8 @@
         </console>
 
         <!-- 这个会打印出所有的info及以下级别的信息，每次大小超过size，则这size大小的日志会自动存入按年份-月份建立的文件夹下面并进行压缩，作为存档 -->
-        <RollingFile name="RollingFileInfo" fileName="./logs/${sys:log.path}/info.log"
-                     filePattern="./logs/${sys:log.path}/info-%d{yyyy-MM-dd}-%i.log">
+        <RollingFile name="RollingFileInfo" fileName="./logs/info.log"
+                     filePattern="./logs/info-%d{yyyy-MM-dd}-%i.log">
             <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch） -->
             <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY" />
             <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss:SSS}] [%p] - %l - %m%n" />
@@ -25,8 +25,8 @@
         </RollingFile>
 
 
-        <RollingFile name="RollingFileError" fileName="./logs/${sys:log.path}/error.log"
-                     filePattern="./logs/${sys:log.path}/error-%d{yyyy-MM-dd}-%i.log">
+        <RollingFile name="RollingFileError" fileName="./logs/error.log"
+                     filePattern="./logs/error-%d{yyyy-MM-dd}-%i.log">
             <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY" />
             <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss:SSS}] [%p] - %l - %m%n" />
             <Policies>
@@ -35,8 +35,8 @@
             </Policies>
         </RollingFile>
 
-        <RollingFile name="AllRollingFileError" fileName="./logs/${sys:log.path}/allError.log"
-                     filePattern="./logs/${sys:log.path}/error-%d{yyyy-MM-dd}-%i.log">
+        <RollingFile name="AllRollingFileError" fileName="./logs/allError.log"
+                     filePattern="./logs/error-%d{yyyy-MM-dd}-%i.log">
             <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY" />
             <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss:SSS}] [%p] - %l - %m%n" />
             <Policies>

@@ -13,7 +13,7 @@ mybatis-plus:
     #驼峰下划线转换
     db-column-underline: true
     #mp2.3+ 全局表前缀 mp_
-    table-prefix: db_
+#    table-prefix: db_
   configuration:
     #配置返回数据库(column下划线命名&&返回java实体是驼峰命名)，自动匹配无需as（没开启这个，SQL需要写as： select user_id as userId）
     map-underscore-to-camel-case: true
@@ -22,3 +22,5 @@ mybatis-plus:
     jdbc-type-for-null: 'null'
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     default-enum-type-handler: com.baomidou.mybatisplus.extension.handlers.EnumTypeHandler
+  # 配置枚举类型字段参数的包
+  type-enums-package: com.springboot.demo.enums

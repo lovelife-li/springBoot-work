@@ -1,65 +1,99 @@
-#spring:
-#  shardingsphere:
-#    enabled: true
-#    datasource:
-#      master0:
-#        driver-class-name: com.mysql.cj.jdbc.Driver
-#        password: Ynt2019-MasterWriter
-#        type: com.zaxxer.hikari.HikariDataSource
-#        jdbcUrl: "jdbc:mysql://192.168.88.21:3306/ldbtest_0?useUnicode=true&useSSL=false&characterEncoding=utf8\
-#        &useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai"
-#        username: master_writer
-#      master1:
-#        driver-class-name: com.mysql.cj.jdbc.Driver
-#        password: Ynt2019-MasterWriter
-#        type: com.zaxxer.hikari.HikariDataSource
-#        jdbcUrl: "jdbc:mysql://192.168.88.21:3306/ldbtest_1?useUnicode=true&useSSL=false&characterEncoding=utf8\
-#        &useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai"
-#        username: master_writer
-#      names: master0,master1
-#    props:
-#      executor.size: 8
-#      sql.show: true
-##    sharding:
-##      master-slave-rules:
-##        ds0:
-##          master-data-source-name: master0
-##          # 由于定义为Collection 此处最好用 slave0, slave1 这种形式配置，兼容各种IDE规范
-##          slave-data-source-names: master0-slave0
-##          load-balance-algorithm-type: ROUND_ROBIN
-##        ds1:
-##          master-data-source-name: master1
-##          slave-data-source-names: master1-slave0
-##          load-balance-algorithm-type: ROUND_ROBIN
-##      # 默认操作数据库
-##      default-data-source-name: master0
-#      tables:
-#        order:
-#          # 数据库名.表名（Groovy表达式）
-#          actual-data-nodes: master$->{0..1}.order_$->{0..1}
-#          #自定义策略
-##          database-strategy:
-##            standard:
-##              precise-algorithm-class-name: com.ynt.aegis.dc.sharding.strategy.RecordAndDetailDatabasePreciseShardingAlgorithm
-##              sharding-column: called_num
-##          table-strategy:
-##            standard:
-##              precise-algorithm-class-name: com.ynt.aegis.dc.sharding.strategy.RecordAndDetailTablePreciseShardingAlgorithm
-##              sharding-column: called_num
+spring:
+  shardingsphere:
+    enabled: true
+    datasource:
+      master0:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        password: Ynt2019-MasterWriter
+        type: com.zaxxer.hikari.HikariDataSource
+        jdbcUrl: "jdbc:mysql://192.168.88.21:3306/ldbtest_0?useUnicode=true&useSSL=false&characterEncoding=utf8\
+        &useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai"
+        username: master_writer
+        # HiKariCP连接池的配置信息
+        ## 最小空闲连接数量
+        minimum-idle: 5
+        ## 空闲连接存活最大时间，默认600000（10分钟）
+        idle-timeout: 1800000
+        ## 连接池最大连接数，默认是10
+        maximum-pool-size: 20
+        ## 此属性控制从池返回的连接的默认自动提交行为,默认值：true
+        auto-commit: true
+        pool-name: MyHikariCP1
+        ## 此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认1800000即30分钟
+        max-lifetime: 180000
+        ## 数据库连接超时时间,默认30秒，即30000
+        connection-timeout: 30000
+        connection-test-query: "select 1"
+      master1:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        password: Ynt2019-MasterWriter
+        type: com.zaxxer.hikari.HikariDataSource
+        jdbcUrl: "jdbc:mysql://192.168.88.21:3306/ldbtest_1?useUnicode=true&useSSL=false&characterEncoding=utf8\
+        &useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai"
+        username: master_writer
+        # HiKariCP连接池的配置信息
+        ## 最小空闲连接数量
+        minimum-idle: 5
+        ## 空闲连接存活最大时间，默认600000（10分钟）
+        idle-timeout: 1800000
+        ## 连接池最大连接数，默认是10
+        maximum-pool-size: 20
+        ## 此属性控制从池返回的连接的默认自动提交行为,默认值：true
+        auto-commit: true
+        pool-name: MyHikariCP2
+        ## 此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认1800000即30分钟
+        max-lifetime: 180000
+        ## 数据库连接超时时间,默认30秒，即30000
+        connection-timeout: 30000
+        connection-test-query: "select 1"
+      names: master0,master1
+    props:
+      executor.size: 8
+      # Sharding-JDBC帮助我们将逻辑sql及实际执行的sql均打印出来
+      sql.show: true
+    sharding:
+#      master-slave-rules:
+#        ds0:
+#          master-data-source-name: master0
+#          # 由于定义为Collection 此处最好用 slave0, slave1 这种形式配置，兼容各种IDE规范
+#          slave-data-source-names: master0-slave0
+#          load-balance-algorithm-type: ROUND_ROBIN
+#        ds1:
+#          master-data-source-name: master1
+#          slave-data-source-names: master1-slave0
+#          load-balance-algorithm-type: ROUND_ROBIN
+#      # 默认操作数据库
+#      default-data-source-name: master0
+      tables:
+        s_order:
+          # 数据库名.表名（Groovy表达式）
+          actual-data-nodes: master$->{0..1}.s_order_$->{0..1}
+          #自定义策略
+          database-strategy:
+            standard:
+              precise-algorithm-class-name: com.springboot.demo.sharding.strategy.RoundRobinShardingDatabaseAlgorithm
+              sharding-column: order_id
 #          table-strategy:
-#            inline:
-#              sharding-column: order_id
-#              algorithm-expression: order$->{order_id % 2}
-#          key-generator:
-#            column=order_id: order_id
-#            type: SNOWFLAKE
-##        call_record:
-##          actual-data-nodes: ds${0..1}.call_record_${0..1}
-##          database-strategy:
-##            standard:
-##              precise-algorithm-class-name: com.ynt.aegis.dc.sharding.strategy.RecordAndDetailDatabasePreciseShardingAlgorithm
-##              sharding-column: called_num
-##          table-strategy:
-##            standard:
-##              precise-algorithm-class-name: com.ynt.aegis.dc.sharding.strategy.RecordAndDetailTablePreciseShardingAlgorithm
-##              sharding-column: called_num
+#            standard:
+#              precise-algorithm-class-name: com.ynt.aegis.dc.sharding.strategy.RecordAndDetailTablePreciseShardingAlgorithm
+#              sharding-column: called_num
+          table-strategy:
+            inline:
+              sharding-column: user_id
+              algorithm-expression: s_order_$->{user_id % 2}
+          key-generator:
+            column: order_id
+            type: SNOWFLAKE
+            props:
+              worker:
+                id: 123
+#        call_record:
+#          actual-data-nodes: ds${0..1}.call_record_${0..1}
+#          database-strategy:
+#            standard:
+#              precise-algorithm-class-name: com.ynt.aegis.dc.sharding.strategy.RecordAndDetailDatabasePreciseShardingAlgorithm
+#              sharding-column: called_num
+#          table-strategy:
+#            standard:
+#              precise-algorithm-class-name: com.ynt.aegis.dc.sharding.strategy.RecordAndDetailTablePreciseShardingAlgorithm
+#              sharding-column: called_num
