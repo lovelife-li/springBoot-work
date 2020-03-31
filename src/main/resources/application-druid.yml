@@ -3,9 +3,9 @@ spring:
   datasource:
 #    #初始化sql配置 用schema和data都可以
 #    schema:
-#      - classpath:sql/cat.sql
+#      - classpath:sql/druid-cat.sql
 #    data:
-#     - classpath:sql/db_user.sql
+#     - classpath:sql/druid-db_user.sql
     initialization-mode: always
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource

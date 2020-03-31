@@ -8,6 +8,7 @@ import com.springboot.demo.entity.ReqData;
 import com.springboot.demo.entity.User;
 import com.springboot.demo.entity.emums.ColorType;
 import com.springboot.demo.service.IUserService;
+import com.springboot.demo.service.impl.UserServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -115,6 +116,25 @@ public class UserController {
     public ResponseWrapper<String> getData(String name, Date start, @RequestParam LocalDate end,
                                            @RequestParam LocalDateTime mid) {
         log.info("接收数据,start:{},end:{},mid:{}", start, end, mid);
+        return ResponseWrapper.markSuccess("");
+    }
+
+    /**
+     * Spring MVC容器可以访问父容器中的Bean,但是父容器不能访问子容器的Bean，
+     * 也就是说Spring根容器不能访问SpringMVC容器里的Bean。
+     * 说的通俗点就是，在Controller里可以访问Service对象，但是在Service里不可以访问Controller对象
+     *
+     * 看看在springBoot项目验证结果，结果是可以成功的。
+     * 说明：springBoot 和 传统Spring MVC项目这一点是不一样的。
+     * @return
+     */
+    @ApiOperation("测试service调用Controller")
+    @GetMapping("/testData5")
+    public ResponseWrapper<String> testInvoke() {
+
+        UserServiceImpl userService = UserServiceImpl.class.cast(iUserService);
+        userService.testInvoke();
+
         return ResponseWrapper.markSuccess("");
     }
 

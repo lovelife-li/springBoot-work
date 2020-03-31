@@ -36,7 +36,7 @@ import java.util.HashMap;
  * @since 2019-04-29
  */
 @Slf4j
-@Api(tags = "用户管理")
+@Api(tags = "订单管理")
 @RestController
 @RequestMapping("/order")
 public class OrderController {
